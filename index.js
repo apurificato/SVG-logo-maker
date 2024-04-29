@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
-const fs = require('fs')
+const fs = require('fs');
 const inquirer = require('inquirer');
+
 
 // Create an array of questions for user input
 const questions = [
@@ -20,7 +21,8 @@ const questions = [
         type: 'list',
         name: 'titleColor',
         message: 'What color do you want the title to be?',
-        choices: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black']
+        choices: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black'],
+        prefix: '\n'
     },
 
     {
@@ -34,7 +36,8 @@ const questions = [
         type: 'list',
         name: 'shapeColor',
         message: 'What color do you want the shape to be?',
-        choices: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black']
+        choices: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black'],
+        prefix: '\n'
     }
 ];
 
