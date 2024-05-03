@@ -1,10 +1,11 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
+import ('shapes.js', 'generateSVG')
 
 
-// Create an array of questions for user input
-const questions = [
+// Prompt for an array of questions to take SVG Parameters
+const questions = inquirer.prompt ([
     {
         name: 'title',
         message: 'Choose a short title for your logo (3 character Max).',
@@ -39,18 +40,32 @@ const questions = [
         choices: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black'],
         prefix: '\n'
     }
-];
+]).then(answers => {
+    // Generate SVG code
+    const svgCode = `
+        <svg width="${answers.width}" height="${answers.height}" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="${answers.backgroundColor}"/>
+            <!-- Add more SVG elements here based on user input -->
+        </svg>
+    `;
+
+    // Write SVG to file
+    fs.writeFileSync('output.svg', svgCode);
+
+    console.log('SVG file generated successfully!');
+}).catch(error => {
+    console.error('Error:', error);
+});
 
 // Function that writes SVG file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) => {
-        if (err) {
-            return console.log(err)
-        }
-
-        console.log('SVG File successfully generated.')
-    })
-}
+// function writeToFile('Logo.svg', svgCode) {
+//     fs.writeFile('Logo.svg', svgCode, (err) => {
+//         if (err) {
+//             return console.log(err)
+//         }
+//         console.log('SVG File successfully generated.')
+//     })
+// }
 
 // Function that triggers prompt and asks questions for building markdown data
 function ask() {
